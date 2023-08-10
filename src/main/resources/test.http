@@ -4,11 +4,11 @@ POST http://localhost:8080/books
 Content-Type: application/json
 
 {
-  "title": "Master and Margarita",
-  "author": "Bulgakov",
-  "isbn": "00001",
-  "price": "100",
-  "description": "novel"
+  "title": "Poems",
+  "author": "Esenin",
+  "isbn": "00003",
+  "price": "130",
+  "description": "Poems"
 }
 
 ### Get all Books
@@ -17,3 +17,20 @@ GET http://localhost:8080/books
 ### Get Book by id
 GET http://localhost:8080/books/1
 
+### Search by params
+GET http://localhost:8080/books/search?authorIn=pushkin,esenin,bulgakov&priceMax=150&priceMin=10&titleContains=poems
+
+### Update  Book
+PUT http://localhost:8080/books/1
+Content-Type: application/json
+
+{
+  "title": "Poems",
+  "author": "Pushkin",
+  "isbn": "00001",
+  "price": "150",
+  "description": "Poems"
+}
+
+### Delete Book by id
+DELETE http://localhost:8080/books/1

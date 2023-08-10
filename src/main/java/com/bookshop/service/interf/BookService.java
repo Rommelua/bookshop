@@ -3,6 +3,7 @@ package com.bookshop.service.interf;
 import com.bookshop.dto.BookDto;
 import com.bookshop.dto.CreateBookRequestDto;
 import java.util.List;
+import java.util.Map;
 
 public interface BookService {
     BookDto save(CreateBookRequestDto bookDto);
@@ -10,4 +11,10 @@ public interface BookService {
     List<BookDto> findAll();
 
     BookDto findById(Long id);
+
+    void deleteById(Long id);
+
+    BookDto update(Long id, CreateBookRequestDto bookDto);
+
+    List<BookDto> findAllByParams(Map<String, String> params);
 }
