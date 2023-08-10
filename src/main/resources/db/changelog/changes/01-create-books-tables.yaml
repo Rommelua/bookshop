@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-books-table
+      author: LeonidSivko
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: author
+                  type: VARCHAR(255)
+              - column:
+                  name: cover_image
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_deleted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                  name: isbn
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: price
+                  type: DECIMAL(19, 2)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
