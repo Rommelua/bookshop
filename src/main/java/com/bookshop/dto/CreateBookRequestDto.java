@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import lombok.Data;
+import org.hibernate.validator.constraints.ISBN;
 
 @Data
 public class CreateBookRequestDto {
@@ -12,7 +13,8 @@ public class CreateBookRequestDto {
     private String title;
     @NotBlank
     private String author;
-    @NotBlank
+    @NotNull
+    @ISBN
     private String isbn;
     @NotNull
     @Positive
