@@ -9,13 +9,15 @@ import com.bookshop.model.Category;
 import java.util.stream.Collectors;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 
 @Mapper(config = MapperConfig.class)
 public interface BookMapper {
+    @Mapping(target = "categoryIds", ignore = true)
     BookDto toDto(Book book);
 
+    @Mapping(target = "categories", ignore = true)
     Book toModel(CreateBookRequestDto requestDto);
 
     BookDtoWithoutCategoryIds toDtoWithoutCategories(Book book);
@@ -27,8 +29,10 @@ public interface BookMapper {
                 .collect(Collectors.toSet()));
     }
 
-//    @Named("bookFromId")
-//    default Book bookFromId(Long id) {
-//
-//    }
+    @AfterMapping
+    default void setCategories(@MappingTarget Book book, CreateBookRequestDto bookDto) {
+        book.setCategories(bookDto.getCategoryIds().stream()
+                .map(Category::new)
+                .collect(Collectors.toSet()));
+    }
 }

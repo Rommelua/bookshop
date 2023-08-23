@@ -1,13 +1,15 @@
 package com.bookshop.controller;
 
-import com.bookshop.dto.BookDto;
 import com.bookshop.dto.BookDtoWithoutCategoryIds;
 import com.bookshop.dto.CategoryDto;
-import com.bookshop.dto.CreateBookRequestDto;
 import com.bookshop.dto.CreateCategoryRequestDto;
 import com.bookshop.service.interf.BookService;
 import com.bookshop.service.interf.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
@@ -31,10 +33,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/categories")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final BookService bookService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new Category")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Category created successfully",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoryDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid request",
+                    content = @Content)
+    })
     @PreAuthorize("hasRole('ADMIN')")
     public CategoryDto create(@RequestBody @Valid CreateCategoryRequestDto dto) {
         return categoryService.save(dto);
@@ -46,11 +56,11 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-//    @GetMapping("/{id}/books")
-//    @Operation(summary = "Get all Categories", description = "Get a list of all available Categories")
-//    public List<BookDtoWithoutCategoryIds> getAll(@PathVariable Long id, Pageable pageable) {
-//        return categoryService.findBooksByCategoryId(id, pageable);
-//    }
+    @GetMapping("/{id}/books")
+    @Operation(summary = "Get all Categories", description = "Get a list of all available Categories")
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id, Pageable pageable) {
+        return bookService.findBooksByCategoryId(id, pageable);
+    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")

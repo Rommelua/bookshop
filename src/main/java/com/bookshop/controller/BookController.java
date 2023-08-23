@@ -63,7 +63,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<BookDto> searchBooks(@RequestParam Map<String, String> params) {
-        return bookService.findAllByParams(params);
+    public List<BookDto> searchBooks(@RequestParam Map<String, String> params, Pageable pageable) {
+        return bookService.findAllByParams(params, pageable);
     }
 }

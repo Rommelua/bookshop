@@ -1,14 +1,10 @@
 package com.bookshop.model;
 
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,14 +26,10 @@ public class Category {
     @Column(nullable = false)
     private String name;
     private String description;
-    @ManyToMany
-    @JoinTable(name = "books_categories",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private Set<Book> books;
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
 
-    public void addBook(Book book) {
-        books.add(book);
-        book.getCategories().add(this);
+    public Category(Long id) {
+        this.id = id;
     }
 }

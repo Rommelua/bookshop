@@ -1,6 +1,7 @@
 package com.bookshop.service.interf;
 
 import com.bookshop.dto.BookDto;
+import com.bookshop.dto.BookDtoWithoutCategoryIds;
 import com.bookshop.dto.CreateBookRequestDto;
 import java.util.List;
 import java.util.Map;
@@ -17,5 +18,7 @@ public interface BookService {
 
     BookDto update(Long id, CreateBookRequestDto bookDto);
 
-    List<BookDto> findAllByParams(Map<String, String> params);
+    List<BookDto> findAllByParams(Map<String, String> params, Pageable pageable);
+
+    List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long id, Pageable pageable);
 }
