@@ -1,6 +1,7 @@
 package com.bookshop.service;
 
 import com.bookshop.dto.BookDto;
+import com.bookshop.dto.BookDtoWithoutCategoryIds;
 import com.bookshop.dto.CreateBookRequestDto;
 import com.bookshop.exception.EntityNotFoundException;
 import com.bookshop.mapper.BookMapper;
@@ -56,7 +57,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAllByParams(Map<String, String> params) {
+    public List<BookDto> findAllByParams(Map<String, String> params, Pageable pageable) {
         Specification<Book> specification = null;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             Specification<Book> sp = specificationManager.get(entry.getKey(),
@@ -65,8 +66,15 @@ public class BookServiceImpl implements BookService {
                     ? Specification.where(sp)
                     : specification.and(sp);
         }
-        return repository.findAll(specification).stream()
+        return repository.findAll(specification, pageable).stream()
                 .map(bookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> findBooksByCategoryId(Long categoryId, Pageable pageable) {
+        return repository.findAllByCategoryId(categoryId, pageable).stream()
+                .map(bookMapper::toDtoWithoutCategories)
                 .collect(Collectors.toList());
     }
 }
