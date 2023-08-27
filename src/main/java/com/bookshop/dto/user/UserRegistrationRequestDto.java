@@ -1,4 +1,4 @@
-package com.bookshop.dto;
+package com.bookshop.dto.user;
 
 import com.bookshop.dto.validation.PasswordMatch;
 import javax.validation.constraints.Email;

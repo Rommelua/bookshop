@@ -1,7 +1,7 @@
 package com.bookshop.security;
 
-import com.bookshop.dto.UserLoginRequestDto;
-import com.bookshop.dto.UserLoginResponseDto;
+import com.bookshop.dto.user.UserLoginRequestDto;
+import com.bookshop.dto.user.UserLoginResponseDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.bookshop.service;
 
-import com.bookshop.dto.UserRegistrationRequestDto;
-import com.bookshop.dto.UserResponseDto;
+import com.bookshop.dto.user.UserRegistrationRequestDto;
+import com.bookshop.dto.user.UserResponseDto;
 import com.bookshop.exception.RegistrationException;
 import com.bookshop.mapper.UserMapper;
 import com.bookshop.model.Role;

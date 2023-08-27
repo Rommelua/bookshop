@@ -1,7 +1,7 @@
 package com.bookshop.mapper;
 
 import com.bookshop.config.MapperConfig;
-import com.bookshop.dto.UserResponseDto;
+import com.bookshop.dto.user.UserResponseDto;
 import com.bookshop.model.User;
 import org.mapstruct.Mapper;
 
