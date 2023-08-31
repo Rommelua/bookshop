@@ -1,5 +1,6 @@
 package com.bookshop.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,4 +39,15 @@ public class ShoppingCart {
 
     @Column(nullable = false)
     private boolean isDeleted = false;
+
+    @Transient
+    public BigDecimal getTotalPrice() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (CartItem cartItem : cartItems) {
+            BigDecimal itemPrice = cartItem.getBook().getPrice()
+                    .multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+            total = total.add(itemPrice);
+        }
+        return total;
+    }
 }
