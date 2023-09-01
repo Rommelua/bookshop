@@ -34,4 +34,21 @@ public class Role {
     public enum RoleName {
         ADMIN, USER
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Role role = (Role) o;
+        return roleName == role.roleName;
+    }
+
+    @Override
+    public int hashCode() {
+        return roleName.hashCode();
+    }
 }

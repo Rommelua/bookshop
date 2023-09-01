@@ -7,6 +7,7 @@ import com.bookshop.model.User;
 import com.bookshop.service.interf.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +36,7 @@ public class ShoppingCartController {
     @PostMapping
     @Operation(summary = "Add an item to a cart")
     public ShoppingCartDto addToCart(
-            @RequestBody AddToCartRequestDto request,
+            @RequestBody @Valid AddToCartRequestDto request,
             Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
@@ -46,7 +47,7 @@ public class ShoppingCartController {
     @Operation(summary = "Update an item quantity in a cart")
     public ShoppingCartDto updateCartItem(
             @PathVariable Long id,
-            @RequestBody UpdateCartItemRequestDto request,
+            @RequestBody @Valid UpdateCartItemRequestDto request,
             Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
