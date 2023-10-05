@@ -1,6 +1,7 @@
 package com.bookshop.dto.book;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -26,5 +27,5 @@ public class CreateBookRequestDto {
     private BigDecimal price;
     private String description;
     private String coverImage;
-    private Set<Long> categoryIds;
+    private Set<Long> categoryIds = new HashSet<>();
 }

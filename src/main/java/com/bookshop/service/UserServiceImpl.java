@@ -37,9 +37,4 @@ public class UserServiceImpl implements UserService {
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }
-
-    @Override
-    public User get(Long id) {
-        return null;
-    }
 }
