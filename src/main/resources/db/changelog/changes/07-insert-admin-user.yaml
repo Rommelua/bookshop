@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles-into-roles-table
+      author: LeonidSivko
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "admin@gmail.com"
+              - column:
+                  name: first_name
+                  value: "admin"
+              - column:
+                  name: last_name
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "$2a$10$lcGa6DjmiLDZapNJwYUPMeiOTUAq6LEVudsCCnnsE9r2UlkHEuk0q"
+              - column:
+                  name: is_deleted
+                  valueBoolean: "false"
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1

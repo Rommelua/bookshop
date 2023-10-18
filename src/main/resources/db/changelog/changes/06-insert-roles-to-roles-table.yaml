@@ -7,11 +7,17 @@ databaseChangeLog:
             tableName: roles
             columns:
               - column:
-                  name: name
+                  name: role_name
                   value: "ADMIN"
+              - column:
+                  name: is_deleted
+                  valueBoolean: "false"
         - insert:
             tableName: roles
             columns:
               - column:
-                  name: name
+                  name: role_name
                   value: "USER"
+              - column:
+                  name: is_deleted
+                  valueBoolean: "false"
